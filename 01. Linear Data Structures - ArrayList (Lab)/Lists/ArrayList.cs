@@ -48,7 +48,7 @@ public class ArrayList<T> : IEnumerable<T>
             {
                 throw new ArgumentOutOfRangeException();
             }
-            Arr[index] = value;
+            this.Arr[index] = value;
         }
     }
 
