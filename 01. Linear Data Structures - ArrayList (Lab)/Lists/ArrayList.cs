@@ -8,6 +8,7 @@ public class ArrayList<T> : IEnumerable<T>
     public int Count { get; private set; }
     public int Capacity { get; private set; }
     private T[] Arr;
+    private int minCapacity = DefaultCapacity;
 
     public ArrayList() : this(DefaultCapacity)
     {
@@ -18,6 +19,10 @@ public class ArrayList<T> : IEnumerable<T>
         this.Count = 0;
         this.Capacity = capacity;
         this.Arr = new T[capacity];
+        if (capacity > DefaultCapacity)
+        {
+            minCapacity = capacity;
+        }
     }
 
     public ArrayList(IEnumerable<T> collection)
@@ -48,7 +53,7 @@ public class ArrayList<T> : IEnumerable<T>
             {
                 throw new ArgumentOutOfRangeException();
             }
-            Arr[index] = value;
+            this.Arr[index] = value;
         }
     }
 
@@ -83,7 +88,7 @@ public class ArrayList<T> : IEnumerable<T>
         }
         this.Arr[this.Count - 1] = default(T);
         this.Count--;
-        if (this.Count * 3 <= this.Capacity && this.Capacity > 2)
+        if (this.Count * 3 <= this.Capacity && this.Capacity / 2 >= this.minCapacity)
         {
             this.Shrink();
         }
