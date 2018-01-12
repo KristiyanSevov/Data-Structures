@@ -5,7 +5,6 @@ public class CircularQueue<T>
     private const int DefaultCapacity = 4;
     private T[] arr;
     private int capacity;
-    private int minCapacity;
     private int head;
     private int tail;
     public int Count { get; private set; }
@@ -17,7 +16,6 @@ public class CircularQueue<T>
         this.head = 0;
         this.tail = 0;
         this.Count = 0;
-        this.minCapacity = initialCapacity > DefaultCapacity ? initialCapacity : DefaultCapacity;
     }
 
     public void Enqueue(T element)
@@ -61,21 +59,7 @@ public class CircularQueue<T>
         this.arr[this.head] = default(T);
         this.head = (this.head + 1) % this.capacity;
         this.Count--;
-        if (this.Count * 3 <= this.capacity && this.capacity / 2 >= minCapacity)
-        {
-            this.Shrink();
-        }
         return element;
-    }
-
-    private void Shrink()
-    {
-        T[] shrunkArr = new T[this.capacity / 2];
-        this.CopyAllElements(shrunkArr);
-        this.arr = shrunkArr;
-        this.head = 0;
-        this.tail = this.Count;
-        this.capacity /= 2;
     }
 
     public T[] ToArray()
