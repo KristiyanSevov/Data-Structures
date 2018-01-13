@@ -1,9 +1,21 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
 public class LinkedList<T> : IEnumerable<T>
 {
+    private class Node<T>
+    {
+        public T Value { get; set; }
+        public Node<T> Next { get; set; }
+
+        public Node(T value)
+        {
+            this.Value = value;
+            this.Next = null;
+        }
+    }
+
     private Node<T> head;
     private Node<T> tail;
     public int Count { get; private set; }
@@ -107,17 +119,5 @@ public class LinkedList<T> : IEnumerable<T>
     IEnumerator IEnumerable.GetEnumerator()
     {
         return GetEnumerator();
-    }
-}
-
-class Node<T>
-{
-    public T Value { get; set; }
-    public Node<T> Next { get; set; }
-
-    public Node(T value)
-    {
-        this.Value = value;
-        this.Next = null;
     }
 }
