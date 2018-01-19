@@ -26,22 +26,19 @@ public class BinaryTree<T>
             Console.WriteLine(new string(' ', indent) + node.value);
             PrintPreOrder(node.leftChild, indent + 2);
             PrintPreOrder(node.rightChild, indent + 2);
-        }   
+        }
     }
 
     public void EachInOrder(Action<T> action)
     {
-        BinaryTree<T> root = this;
-        this.EachInOrder(action, root);
-    }
-
-    private void EachInOrder(Action<T> action, BinaryTree<T> node)
-    {
-        if (node != null)
+        if (this.leftChild != null)
         {
-            EachInOrder(action, node.leftChild);
-            action(node.value);
-            EachInOrder(action, node.rightChild);
+            this.leftChild.EachInOrder(action);
+        }
+        action(this.value);
+        if (this.rightChild != null)
+        {
+            this.rightChild.EachInOrder(action);
         }
     }
 
