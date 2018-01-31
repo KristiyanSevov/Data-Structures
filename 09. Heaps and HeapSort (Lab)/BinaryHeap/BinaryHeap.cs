@@ -69,7 +69,7 @@ public class BinaryHeap<T> where T : IComparable<T>
 
     private void MaxHeapifyDown(int index)
     {
-        while (index <= this.heap.Count / 2)
+        while (index < this.heap.Count / 2)
         {
             int leftIndex = index * 2 + 1;
             int rightIndex = index * 2 + 2;
