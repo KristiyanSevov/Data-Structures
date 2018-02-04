@@ -9,7 +9,7 @@ class Program
     static void Main(string[] args)
     {
         int inputs = int.Parse(Console.ReadLine());
-        for (int i = 0; i < inputs-1; i++)
+        for (int i = 0; i < inputs - 1; i++)
         {
             int[] nodes = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
             int parent = nodes[0];
@@ -106,8 +106,54 @@ class Program
         return deepestNode;
     }
 
+    //private static Tree<int> FindDeepestNode() //DFS - alternative solution
+    //{
+    //    Tree<int> root = FindRoot();
+    //    FindDeepestNode(root, 0);
+    //    return result;
+    //}
+
+    //private static int maxDepth = -1;
+    //private static Tree<int> result = null;
+    //private static void FindDeepestNode(Tree<int> node, int depth)
+    //{
+    //    foreach (var child in node.Children)
+    //    {
+    //        FindDeepestNode(child, depth + 1);
+    //    }
+    //    if (depth > maxDepth)
+    //    {
+    //        maxDepth = depth;
+    //        result = node;
+    //    }
+    //}
+
+    //private static Tree<int> FindDeepestNode()  //BFS - alternative solution
+    //{
+    //    int maxDepth = -1;
+    //    Tree<int> result = null;
+    //    var queue = new Queue<Tuple<Tree<int>, int>>();
+    //    queue.Enqueue(Tuple.Create(FindRoot(), 0));
+    //    while (queue.Count != 0)
+    //    {
+    //        var tuple = queue.Dequeue();
+    //        Tree<int> node = tuple.Item1;
+    //        int nodeDepth = tuple.Item2;
+    //        foreach (var child in node.Children)
+    //        {
+    //            queue.Enqueue(Tuple.Create(child, nodeDepth + 1));
+    //        }
+    //        if (nodeDepth > maxDepth)
+    //        {
+    //            maxDepth = nodeDepth;
+    //            result = node;
+    //        }
+    //    }
+    //    return result;
+    //}
+
     private static void PrintLongestPath()
-    {      
+    {
         Tree<int> deepest = FindDeepestNode();
         Stack<int> path = GetPath(deepest);
         Console.WriteLine("Longest path: {0}", string.Join(" ", path));
