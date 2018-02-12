@@ -44,10 +44,10 @@ public class AVL<T> where T : IComparable<T>
         {
             node.Right = this.Insert(node.Right, item);
         }
-        int heightDiff = this.GetHeigth(node.Left) - this.GetHeigth(node.Right);
+        int heightDiff = this.GetHeight(node.Left) - this.GetHeight(node.Right);
         if (heightDiff > 1)
         {
-            int childHeightDiff = this.GetHeigth(node.Left.Left) - this.GetHeigth(node.Left.Right);
+            int childHeightDiff = this.GetHeight(node.Left.Left) - this.GetHeight(node.Left.Right);
             if (childHeightDiff < 0)
             {
                 node.Left = RotateLeft(node.Left);
@@ -56,18 +56,18 @@ public class AVL<T> where T : IComparable<T>
         }
         else if (heightDiff < -1)
         {
-            int childHeightDiff = this.GetHeigth(node.Right.Left) - this.GetHeigth(node.Right.Right);
+            int childHeightDiff = this.GetHeight(node.Right.Left) - this.GetHeight(node.Right.Right);
             if (childHeightDiff > 0)
             {
                 node.Right = RotateRight(node.Right);
             }
             node = RotateLeft(node);
         }
-        node.Height = 1 + Math.Max(GetHeigth(node.Left), GetHeigth(node.Right));
+        node.Height = 1 + Math.Max(GetHeight(node.Left), GetHeight(node.Right));
         return node;
     }
 
-    private int GetHeigth(Node<T> node)
+    private int GetHeight(Node<T> node)
     {
         return node != null ? node.Height : 0;
     }
@@ -77,7 +77,7 @@ public class AVL<T> where T : IComparable<T>
         Node<T> parent = node.Right;
         node.Right = parent.Left;
         parent.Left = node;
-        node.Height = 1 + Math.Max(GetHeigth(node.Left), GetHeigth(node.Right));
+        node.Height = 1 + Math.Max(GetHeight(node.Left), GetHeight(node.Right));
         return parent;
     }
 
@@ -86,7 +86,7 @@ public class AVL<T> where T : IComparable<T>
         Node<T> parent = node.Left;
         node.Left = parent.Right;
         parent.Right = node;
-        node.Height = 1 + Math.Max(GetHeigth(node.Left), GetHeigth(node.Right));
+        node.Height = 1 + Math.Max(GetHeight(node.Left), GetHeight(node.Right));
         return parent;
     }
 
