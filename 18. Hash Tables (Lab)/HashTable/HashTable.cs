@@ -36,9 +36,9 @@ public class HashTable<TKey, TValue> : IEnumerable<KeyValue<TKey, TValue>>
         this.GrowIfNeeded();
         int index = Math.Abs(key.GetHashCode()) % this.Capacity;
         KeyValue<TKey, TValue> pair = new KeyValue<TKey, TValue>(key, value);
-        if (table[index] == null)
+        if (this.table[index] == null)
         {
-            table[index] = new LinkedList<KeyValue<TKey, TValue>>();
+            this.table[index] = new LinkedList<KeyValue<TKey, TValue>>();
         }
         this.table[index].AddLast(pair);
         this.Count++;
@@ -101,16 +101,14 @@ public class HashTable<TKey, TValue> : IEnumerable<KeyValue<TKey, TValue>>
 
     public bool TryGetValue(TKey key, out TValue value)
     {
-        try
+        var pair = this.Find(key);
+        if (pair != null)
         {
-            value = this.Get(key);
+            value = pair.Value;
             return true;
         }
-        catch (KeyNotFoundException)
-        {
-            value = default(TValue);
-            return false;
-        }
+        value = default(TValue);
+        return false;
     }
 
     public KeyValue<TKey, TValue> Find(TKey key)
@@ -131,15 +129,7 @@ public class HashTable<TKey, TValue> : IEnumerable<KeyValue<TKey, TValue>>
 
     public bool ContainsKey(TKey key)
     {
-        try
-        {
-            this.Get(key);
-            return true;
-        }
-        catch (KeyNotFoundException)
-        {
-            return false;
-        }
+        return this.Find(key) != null ? true : false;
     }
 
     public bool Remove(TKey key)
