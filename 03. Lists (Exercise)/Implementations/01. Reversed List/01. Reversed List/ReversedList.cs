@@ -53,7 +53,7 @@ class ReversedList<T> : IEnumerable<T>
             {
                 throw new InvalidOperationException();
             }
-            return this.arr[this.Count - 1 - index]; //to fix
+            return this.arr[this.Count - 1 - index]; 
         }
         set
         {
