@@ -50,7 +50,8 @@ public class FirstLastList<T> : IFirstLastList<T> where T : IComparable<T>
         }
     }
 
-    public IEnumerable<T> Last(int count) //will work fine as long as there weren't many insertions and deletions 
+    //will work fine as long as there weren't many insertions and deletions 
+    public IEnumerable<T> Last(int count) 
     {
         if (count > this.Count)
         {
